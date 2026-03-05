@@ -82,7 +82,7 @@ export const DATA = {
       title: "Founder & Creative Director",
       logoUrl: "/me.png",
       start: "2023",
-      end: "Present",
+      end: "2026",
       description:
         "Founded and run The Lost Label, an independent music label releasing Brazilian Funk and Phonk music. Responsible for creative direction, web design, branding, and artist development. Built the full website and digital presence from scratch.",
     },
@@ -94,7 +94,7 @@ export const DATA = {
       title: "Web Designer & Developer",
       logoUrl: "/me.png",
       start: "2024",
-      end: "Present",
+      end: "2025",
       description:
         "Designed and developed the full website for Elysian Records — a music label brand. Handled UI/UX design, frontend development, and deployment.",
     },
@@ -104,7 +104,7 @@ export const DATA = {
     {
       title: "The Lost Label",
       href: "https://thelostlabel.com",
-      dates: "2023 - Present",
+      dates: "2023 - 2026",
       active: true,
       description:
         "Independent music label I founded, focused on Brazilian Funk and Phonk. Designed and built the complete website and brand identity from the ground up.",
@@ -128,7 +128,7 @@ export const DATA = {
     {
       title: "Elysian Records",
       href: "https://elysianrecords.com",
-      dates: "2024",
+      dates: "2024 - 2025",
       active: true,
       description:
         "Full website design and development for Elysian Records. Built a clean, modern music label site with a focus on brand identity and user experience.",
