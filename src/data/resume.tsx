@@ -31,7 +31,7 @@ export const DATA = {
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
   ],
   contact: {
-    email: "contact@grxtor.com",
+    email: "info@grxtor.com",
     tel: "",
     social: {
       GitHub: {
@@ -58,9 +58,15 @@ export const DATA = {
         icon: Icons.youtube,
         navbar: true,
       },
+      Spotify: {
+        name: "Spotify",
+        url: "https://open.spotify.com/artist/3Oohh6pTxKXeLNeLXgalhe",
+        icon: Icons.spotify,
+        navbar: true,
+      },
       email: {
         name: "Send Email",
-        url: "mailto:contact@grxtor.com",
+        url: "mailto:info@grxtor.com",
         icon: Icons.email,
         navbar: false,
       },
