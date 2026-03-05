@@ -104,7 +104,7 @@ export const DATA = {
     {
       title: "The Lost Label",
       href: "https://thelostlabel.com",
-      dates: "2023 - 2026",
+      dates: "2026",
       active: true,
       description:
         "Independent music label I founded, focused on Brazilian Funk and Phonk. Designed and built the complete website and brand identity from the ground up.",
@@ -128,7 +128,7 @@ export const DATA = {
     {
       title: "Elysian Records",
       href: "https://elysianrecords.com",
-      dates: "2024 - 2025",
+      dates: "2025",
       active: true,
       description:
         "Full website design and development for Elysian Records. Built a clean, modern music label site with a focus on brand identity and user experience.",
