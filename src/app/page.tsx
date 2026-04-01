@@ -11,9 +11,38 @@ import { SpotifyWidget } from "@/components/spotify-widget";
 
 const BLUR_FADE_DELAY = 0.04;
 
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Abdullah Hüseyin Efe",
+  alternateName: "GRXTOR",
+  url: "https://grxtor.com",
+  image: "https://grxtor.com/me.png",
+  jobTitle: "Web Designer & Music Producer",
+  description: DATA.description,
+  sameAs: [
+    "https://github.com/grxtor",
+    "https://linkedin.com/in/grxtor",
+    "https://x.com/grxtor",
+    "https://youtube.com/@grxtor",
+    "https://open.spotify.com/artist/3Oohh6pTxKXeLNeLXgalhe",
+  ],
+  knowsAbout: ["Web Design", "Music Production", "Brazilian Funk", "Phonk"],
+  founder: {
+    "@type": "Organization",
+    name: "The Lost Label",
+    url: "https://thelostlabel.com",
+  },
+}).replace(/</g, "\\u003c");
+
 export default function Page() {
   return (
     <main className="min-h-dvh flex flex-col gap-14 relative">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: personJsonLd }}
+      />
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between">
