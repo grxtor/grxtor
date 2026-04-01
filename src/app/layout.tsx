@@ -24,12 +24,22 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name,
+    default: `${DATA.name} (${DATA.realName})`,
     template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
+  keywords: [
+    "Abdullah Hüseyin Efe",
+    "GRXTOR",
+    "grxtor",
+    "web designer",
+    "music producer",
+    "The Lost Label",
+    "Brazilian Funk",
+    "Phonk",
+  ],
   openGraph: {
-    title: `${DATA.name}`,
+    title: `${DATA.name} (${DATA.realName})`,
     description: DATA.description,
     url: DATA.url,
     siteName: `${DATA.name}`,
@@ -48,7 +58,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: `${DATA.name}`,
+    title: `${DATA.name} (${DATA.realName})`,
     card: "summary_large_image",
   },
   verification: {

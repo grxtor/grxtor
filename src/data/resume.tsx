@@ -7,12 +7,13 @@ import { Nodejs } from "@/components/ui/svgs/nodejs";
 
 export const DATA = {
   name: "GRXTOR",
+  realName: "Abdullah Hüseyin Efe",
   initials: "GR",
   url: "https://grxtor.com",
   location: "Turkey",
   locationLink: "https://www.google.com/maps/place/Turkey",
   description:
-    "Web Designer & Music Producer. Founder of The Lost Label — Brazilian Funk & Phonk.",
+    "Abdullah Hüseyin Efe (GRXTOR) — Web Designer & Music Producer. Founder of The Lost Label — Brazilian Funk & Phonk.",
   summary:
     "I'm GRXTOR (Abdullah Hüseyin Efe), a web designer and music producer based in Turkey. I run [The Lost Label](https://thelostlabel.com), an independent music label releasing Brazilian Funk and Phonk. I design and build websites for music brands — including [thelostlabel.com](https://thelostlabel.com) and [elysianrecords.com](https://elysianrecords.com). When I'm not behind a screen, I'm producing Brazilian Funk tracks and pushing new sounds.",
   avatarUrl: "/me.png",
