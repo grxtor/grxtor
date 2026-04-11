@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { DATA } from "@/data/resume";
+import { DATA_DEFAULTS } from "@/data/defaults";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,9 +7,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api/"],
+        disallow: ["/admin/", "/api/"],
       },
     ],
-    sitemap: `${DATA.url}/sitemap.xml`,
+    sitemap: `${DATA_DEFAULTS.url}/sitemap.xml`,
+    host: DATA_DEFAULTS.url,
   };
 }

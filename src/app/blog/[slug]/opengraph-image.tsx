@@ -2,7 +2,7 @@
 
 import { ImageResponse } from "next/og";
 import { allPosts } from "content-collections";
-import { DATA } from "@/data/resume";
+import { DATA_DEFAULTS } from "@/data/defaults";
 
 export const runtime = "edge";
 
@@ -130,8 +130,8 @@ export default async function Image({
         const fontData = await getFontData();
         const { slug } = await params;
         const post = allPosts.find((p) => p._meta.path.replace(/\.mdx$/, "") === slug);
-        const imageUrl = DATA.avatarUrl
-            ? new URL(DATA.avatarUrl, DATA.url).toString()
+        const imageUrl = DATA_DEFAULTS.avatarUrl
+            ? new URL(DATA_DEFAULTS.avatarUrl, DATA_DEFAULTS.url).toString()
             : undefined;
 
         if (!post) {

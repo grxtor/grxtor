@@ -114,12 +114,15 @@
 @layer base {
   * {
     @apply border-border;
+  }
+
+  body:not(.admin) * {
     cursor: none !important;
   }
 
-  input,
-  textarea,
-  select {
+  body:not(.admin) input,
+  body:not(.admin) textarea,
+  body:not(.admin) select {
     cursor: text !important;
   }
 

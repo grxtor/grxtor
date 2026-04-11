@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
 import { allPosts } from "content-collections";
-import { DATA } from "@/data/resume";
+import { DATA_DEFAULTS } from "@/data/defaults";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogPosts = allPosts.map((post) => ({
-    url: `${DATA.url}/blog/${post._meta.path.replace(/\.mdx$/, "")}`,
+    url: `${DATA_DEFAULTS.url}/blog/${post._meta.path.replace(/\.mdx$/, "")}`,
     lastModified: new Date(post.publishedAt),
     changeFrequency: "monthly" as const,
     priority: 0.6,
@@ -12,13 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: DATA.url,
+      url: DATA_DEFAULTS.url,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
-      url: `${DATA.url}/blog`,
+      url: `${DATA_DEFAULTS.url}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

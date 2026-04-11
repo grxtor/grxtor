@@ -1,6 +1,6 @@
 import { allPosts } from "content-collections";
 import { formatDate } from "@/lib/utils";
-import { DATA } from "@/data/resume";
+import { DATA_DEFAULTS } from "@/data/defaults";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXContent } from "@content-collections/mdx/react";
@@ -47,16 +47,21 @@ export async function generateMetadata({
   return {
     title,
     description,
+    authors: [{ name: "Abdullah Hüseyin Efe", url: DATA_DEFAULTS.url }],
+    alternates: {
+      canonical: `${DATA_DEFAULTS.url}/blog/${slug}`,
+    },
     openGraph: {
       title,
       description,
       type: "article",
       publishedTime,
-      url: `${DATA.url}/blog/${slug}`,
+      url: `${DATA_DEFAULTS.url}/blog/${slug}`,
+      authors: ["Abdullah Hüseyin Efe"],
       ...(image && {
         images: [
           {
-            url: `${DATA.url}${image}`,
+            url: image.startsWith("http") ? image : `${DATA_DEFAULTS.url}${image}`,
           },
         ],
       }),
@@ -65,8 +70,9 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
+      creator: "@grxtor",
       ...(image && {
-        images: [`${DATA.url}${image}`],
+        images: [image.startsWith("http") ? image : `${DATA_DEFAULTS.url}${image}`],
       }),
     },
   };
@@ -104,14 +110,14 @@ export default async function Blog({
     dateModified: post.publishedAt,
     description: post.summary,
     image: post.image
-      ? `${DATA.url}${post.image}`
-      : `${DATA.url}/blog/${slug}/opengraph-image`,
-    url: `${DATA.url}/blog/${slug}`,
+      ? `${DATA_DEFAULTS.url}${post.image}`
+      : `${DATA_DEFAULTS.url}/blog/${slug}/opengraph-image`,
+    url: `${DATA_DEFAULTS.url}/blog/${slug}`,
     author: {
       "@type": "Person",
-      name: DATA.realName,
-      alternateName: DATA.name,
-      url: DATA.url,
+      name: DATA_DEFAULTS.realName,
+      alternateName: DATA_DEFAULTS.name,
+      url: DATA_DEFAULTS.url,
     },
   }).replace(/</g, "\\u003c");
 

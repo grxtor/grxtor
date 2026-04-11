@@ -1,13 +1,12 @@
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
+import { DATA_DEFAULTS } from "@/data/defaults";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
+import { SiteShell } from "@/components/layout-shell";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -22,14 +21,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(DATA.url),
+  metadataBase: new URL(DATA_DEFAULTS.url),
   title: {
-    default: `${DATA.name} (${DATA.realName})`,
-    template: `%s | ${DATA.name}`,
+    default: `Abdullah Hüseyin Efe (GRXTOR) — Web Designer & Music Producer`,
+    template: `%s | Abdullah Hüseyin Efe (GRXTOR)`,
   },
-  description: DATA.description,
+  description:
+    "Abdullah Hüseyin Efe, also known as GRXTOR — Web Designer & Music Producer based in Turkey. Founder of The Lost Label, specializing in Brazilian Funk & Phonk music production and modern web design.",
   keywords: [
     "Abdullah Hüseyin Efe",
+    "Abdullah Huseyin Efe",
     "GRXTOR",
     "grxtor",
     "web designer",
@@ -37,12 +38,21 @@ export const metadata: Metadata = {
     "The Lost Label",
     "Brazilian Funk",
     "Phonk",
+    "web developer Turkey",
+    "music producer Turkey",
   ],
+  authors: [{ name: "Abdullah Hüseyin Efe", url: DATA_DEFAULTS.url }],
+  creator: "Abdullah Hüseyin Efe",
+  publisher: "GRXTOR",
+  alternates: {
+    canonical: DATA_DEFAULTS.url,
+  },
   openGraph: {
-    title: `${DATA.name} (${DATA.realName})`,
-    description: DATA.description,
-    url: DATA.url,
-    siteName: `${DATA.name}`,
+    title: "Abdullah Hüseyin Efe (GRXTOR) — Web Designer & Music Producer",
+    description:
+      "Abdullah Hüseyin Efe, also known as GRXTOR — Web Designer & Music Producer. Founder of The Lost Label, specializing in Brazilian Funk & Phonk.",
+    url: DATA_DEFAULTS.url,
+    siteName: "GRXTOR — Abdullah Hüseyin Efe",
     locale: "en_US",
     type: "website",
   },
@@ -58,8 +68,11 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: `${DATA.name} (${DATA.realName})`,
+    title: "Abdullah Hüseyin Efe (GRXTOR) — Web Designer & Music Producer",
+    description:
+      "Web Designer & Music Producer. Founder of The Lost Label — Brazilian Funk & Phonk.",
     card: "summary_large_image",
+    creator: "@grxtor",
   },
   verification: {
     google: "",
@@ -83,18 +96,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
           <TooltipProvider delayDuration={0}>
-            <InteractiveGridPattern
-              width={50}
-              height={50}
-              squares={[40, 40]}
-              className="fixed inset-0 h-full w-full -z-10 [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,white,transparent)] border-0"
-              squaresClassName="stroke-foreground/[0.04] hover:fill-foreground/[0.06] fill-transparent"
-            />
-            <div className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6">
-              {children}
-            </div>
-            <Navbar />
-            <SmoothCursor />
+            <SiteShell navbar={<Navbar />}>{children}</SiteShell>
           </TooltipProvider>
         </ThemeProvider>
       </body>

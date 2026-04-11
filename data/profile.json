@@ -1,0 +1,20 @@
+{
+  "name": "GRXTOR",
+  "realName": "Abdullah Hüseyin Efe",
+  "initials": "GR",
+  "url": "https://grxtor.com",
+  "location": "Turkey",
+  "locationLink": "https://www.google.com/maps/place/Turkey",
+  "description": "Abdullah Hüseyin Efe (GRXTOR) — Web Designer & Music Producer. Founder of The Lost Label — Brazilian Funk & Phonk.",
+  "summary": "I'm GRXTOR (Abdullah Hüseyin Efe), a web designer and music producer based in Turkey. I run [The Lost Label](https://thelostlabel.com), an independent music label releasing Brazilian Funk and Phonk music. I design and build websites for music brands — including [thelostlabel.com](https://thelostlabel.com) and [elysianrecords.com](https://elysianrecords.com). When I'm not behind a screen, I'm producing Brazilian Funk tracks and pushing new sounds.",
+  "avatarUrl": "/me.png",
+  "email": "info@grxtor.com",
+  "social": {
+    "GitHub": { "url": "https://github.com/grxtor", "navbar": true },
+    "LinkedIn": { "url": "https://linkedin.com/in/grxtor", "navbar": false },
+    "X": { "url": "https://x.com/grxtor", "navbar": true },
+    "Youtube": { "url": "https://youtube.com/@grxtor", "navbar": true },
+    "Spotify": { "url": "https://open.spotify.com/artist/3Oohh6pTxKXeLNeLXgalhe", "navbar": true }
+  },
+  "spotifyArtistId": "3Oohh6pTxKXeLNeLXgalhe"
+}

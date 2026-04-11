@@ -1,0 +1,24 @@
+[
+  {
+    "company": "The Lost Label",
+    "href": "https://thelostlabel.com",
+    "badges": ["Founder"],
+    "location": "Remote",
+    "title": "Founder & Creative Director",
+    "logoUrl": "/me.png",
+    "start": "2023",
+    "end": "2026",
+    "description": "Founded and run The Lost Label, an independent music label releasing Brazilian Funk and Phonk music. Responsible for creative direction, web design, branding, and artist development. Built the full website and digital presence from scratch."
+  },
+  {
+    "company": "Elysian Records",
+    "href": "https://elysianrecords.com",
+    "badges": [],
+    "location": "Remote",
+    "title": "Web Designer & Developer",
+    "logoUrl": "/me.png",
+    "start": "2024",
+    "end": "2025",
+    "description": "Designed and developed the full website for Elysian Records — a music label brand. Handled UI/UX design, frontend development, and deployment."
+  }
+]

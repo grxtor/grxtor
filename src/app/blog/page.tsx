@@ -6,16 +6,23 @@ import { paginate, normalizePage } from "@/lib/pagination";
 import { ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Thoughts on software development, life, and more.",
+  title: "Blog — Abdullah Hüseyin Efe (GRXTOR)",
+  description:
+    "Blog yazıları ve düşünceler — Abdullah Hüseyin Efe (GRXTOR). Web design, music production ve daha fazlası.",
+  alternates: {
+    canonical: "https://grxtor.com/blog",
+  },
   openGraph: {
-    title: "Blog",
-    description: "Thoughts on software development, life, and more.",
+    title: "Blog — Abdullah Hüseyin Efe (GRXTOR)",
+    description:
+      "Blog yazıları ve düşünceler — Abdullah Hüseyin Efe (GRXTOR). Web design, music production ve daha fazlası.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog",
-    description: "Thoughts on software development, life, and more.",
+    title: "Blog — Abdullah Hüseyin Efe (GRXTOR)",
+    description:
+      "Blog yazıları ve düşünceler — Abdullah Hüseyin Efe (GRXTOR).",
+    creator: "@grxtor",
   },
 };
 

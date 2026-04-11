@@ -2,7 +2,7 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DATA } from "@/data/resume";
+import { getDATA } from "@/data/resume";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
 import ProjectsSection from "@/components/section/projects-section";
@@ -11,37 +11,64 @@ import { SpotifyWidget } from "@/components/spotify-widget";
 
 const BLUR_FADE_DELAY = 0.04;
 
-const personJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Abdullah Hüseyin Efe",
-  alternateName: "GRXTOR",
-  url: "https://grxtor.com",
-  image: "https://grxtor.com/me.png",
-  jobTitle: "Web Designer & Music Producer",
-  description: DATA.description,
-  sameAs: [
-    "https://github.com/grxtor",
-    "https://linkedin.com/in/grxtor",
-    "https://x.com/grxtor",
-    "https://youtube.com/@grxtor",
-    "https://open.spotify.com/artist/3Oohh6pTxKXeLNeLXgalhe",
-  ],
-  knowsAbout: ["Web Design", "Music Production", "Brazilian Funk", "Phonk"],
-  founder: {
-    "@type": "Organization",
-    name: "The Lost Label",
-    url: "https://thelostlabel.com",
-  },
-}).replace(/</g, "\\u003c");
+export default async function Page() {
+  const DATA = await getDATA();
 
-export default function Page() {
+  const jsonLd = JSON.stringify([
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://grxtor.com/#person",
+      name: "Abdullah Hüseyin Efe",
+      alternateName: ["GRXTOR", "grxtor"],
+      url: "https://grxtor.com",
+      image: "https://grxtor.com/me.png",
+      jobTitle: "Web Designer & Music Producer",
+      description: DATA.description,
+      email: "info@grxtor.com",
+      nationality: {
+        "@type": "Country",
+        name: "Turkey",
+      },
+      sameAs: [
+        "https://github.com/grxtor",
+        "https://linkedin.com/in/grxtor",
+        "https://x.com/grxtor",
+        "https://youtube.com/@grxtor",
+        "https://open.spotify.com/artist/3Oohh6pTxKXeLNeLXgalhe",
+      ],
+      knowsAbout: [
+        "Web Design",
+        "Web Development",
+        "Music Production",
+        "Brazilian Funk",
+        "Phonk",
+        "UI/UX Design",
+      ],
+      founder: {
+        "@type": "Organization",
+        name: "The Lost Label",
+        url: "https://thelostlabel.com",
+        description: "Independent music label releasing Brazilian Funk and Phonk music",
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://grxtor.com/#website",
+      url: "https://grxtor.com",
+      name: "GRXTOR — Abdullah Hüseyin Efe",
+      description: DATA.description,
+      author: { "@id": "https://grxtor.com/#person" },
+    },
+  ]).replace(/</g, "\\u003c");
+
   return (
     <main className="min-h-dvh flex flex-col gap-14 relative">
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: personJsonLd }}
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
@@ -88,7 +115,7 @@ export default function Page() {
             <h2 className="text-xl font-bold">Work Experience</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 6}>
-            <WorkSection />
+            <WorkSection work={DATA.work} />
           </BlurFade>
         </div>
       </section>
@@ -101,7 +128,7 @@ export default function Page() {
             {DATA.skills.map((skill, id) => (
               <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
                 <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
-                  {"icon" in skill && skill.icon && <skill.icon className="size-4 rounded overflow-hidden object-contain" />}
+                  {skill.icon && <skill.icon className="size-4 rounded overflow-hidden object-contain" />}
                   <span className="text-foreground text-sm font-medium">{skill.name}</span>
                 </div>
               </BlurFade>
@@ -118,7 +145,7 @@ export default function Page() {
         <BlurFade delay={BLUR_FADE_DELAY * 14}>
           <div className="flex flex-col gap-y-4">
             <h2 className="text-xl font-bold">Music</h2>
-            <SpotifyWidget artistId="3Oohh6pTxKXeLNeLXgalhe" />
+            <SpotifyWidget artistId={DATA.spotifyArtistId} />
           </div>
         </BlurFade>
       </section>

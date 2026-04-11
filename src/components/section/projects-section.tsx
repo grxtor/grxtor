@@ -1,49 +1,23 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
-import { DATA } from "@/data/resume";
 import { Icons } from "@/components/icons";
-import { promises as fs } from "fs";
-import path from "path";
+import { getProjects } from "@/lib/data";
 
 const BLUR_FADE_DELAY = 0.04;
 
-interface DynamicProject {
-  title: string;
-  href: string;
-  dates: string;
-  description: string;
-  technologies: string[];
-  image: string;
-  video: string;
-  active: boolean;
-}
-
-async function getDynamicProjects(): Promise<DynamicProject[]> {
-  try {
-    const file = path.join(process.cwd(), "data", "projects.json");
-    const data = await fs.readFile(file, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-}
-
 export default async function ProjectsSection() {
-  const dynamic = await getDynamicProjects();
+  const projects = await getProjects();
 
-  const allProjects = [
-    ...dynamic.map((p) => ({
-      ...p,
-      links: [
-        {
-          type: "Website",
-          href: p.href,
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-    })),
-    ...DATA.projects,
-  ];
+  const allProjects = projects.map((p) => ({
+    ...p,
+    links: [
+      {
+        type: "Website",
+        href: p.href,
+        icon: <Icons.globe className="size-3" />,
+      },
+    ],
+  }));
 
   return (
     <section id="projects">
@@ -78,7 +52,7 @@ export default async function ProjectsSection() {
                 dates={project.dates}
                 tags={project.technologies}
                 image={project.image}
-                video={"video" in project ? (project as { video: string }).video : ""}
+                video={project.video || ""}
                 links={project.links as { type: string; href: string; icon: React.ReactNode }[]}
               />
             </BlurFade>
