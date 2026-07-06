@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 export function SiteShell({ children, navbar }: { children: React.ReactNode; navbar: React.ReactNode }) {
   const pathname = usePathname();
@@ -35,7 +34,6 @@ export function SiteShell({ children, navbar }: { children: React.ReactNode; nav
         {children}
       </div>
       {navbar}
-      <SmoothCursor />
     </>
   );
 }

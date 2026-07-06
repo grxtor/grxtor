@@ -116,16 +116,6 @@
     @apply border-border;
   }
 
-  body:not(.admin) * {
-    cursor: none !important;
-  }
-
-  body:not(.admin) input,
-  body:not(.admin) textarea,
-  body:not(.admin) select {
-    cursor: text !important;
-  }
-
   body {
     @apply bg-background text-foreground;
   }
