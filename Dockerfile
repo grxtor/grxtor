@@ -57,7 +57,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/public          ./public
 # Proje verisi (admin paneli buraya yazar)
 # Dokploy'da bu klasörü volume olarak bağla: /app/data → kalıcı depolama
 RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
-COPY --chown=nextjs:nodejs data/projects.json /app/data/projects.json
+COPY --chown=nextjs:nodejs data/ /app/data/
+
+# Blog icerigi (admin paneli buraya yazar) — yazilabilir olmasi gerekir
+RUN mkdir -p /app/content && chown nextjs:nodejs /app/content
+COPY --chown=nextjs:nodejs content/ /app/content/
 
 USER nextjs
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useAdminAuth } from "../layout";
 import { Plus, Trash2, Briefcase } from "lucide-react";
 
 interface Work {
+  id: string;
   company: string;
   href: string;
   badges: string[];
@@ -17,7 +17,6 @@ interface Work {
 }
 
 export default function WorkPage() {
-  const { password } = useAdminAuth();
   const [items, setItems] = useState<Work[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
@@ -38,6 +37,7 @@ export default function WorkPage() {
     setLoading(true);
     setSuccess("");
     const item: Work = {
+      id: crypto.randomUUID(),
       company: form.company,
       title: form.title,
       href: form.href,
@@ -50,7 +50,8 @@ export default function WorkPage() {
     };
     const res = await fetch("/api/admin/work", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-admin-password": password },
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
       body: JSON.stringify(item),
     });
     if (res.ok) {
@@ -62,14 +63,15 @@ export default function WorkPage() {
     setTimeout(() => setSuccess(""), 3000);
   };
 
-  const remove = async (company: string) => {
+  const remove = async (id: string) => {
     const res = await fetch("/api/admin/work", {
       method: "DELETE",
-      headers: { "Content-Type": "application/json", "x-admin-password": password },
-      body: JSON.stringify({ company }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({ id }),
     });
     if (res.ok) {
-      setItems(prev => prev.filter(w => w.company !== company));
+      setItems(prev => prev.filter(w => w.id !== id));
     }
   };
 
@@ -125,7 +127,7 @@ export default function WorkPage() {
         ) : (
           <div className="space-y-3">
             {items.map(w => (
-              <div key={w.company} className="flex items-start justify-between gap-4 border border-border rounded-2xl p-5 bg-card">
+              <div key={w.id} className="flex items-start justify-between gap-4 border border-border rounded-2xl p-5 bg-card">
                 <div className="min-w-0 space-y-1">
                   <div className="flex items-center gap-2">
                     <Briefcase className="size-4 text-muted-foreground" />
@@ -137,7 +139,7 @@ export default function WorkPage() {
                   <div className="text-sm text-muted-foreground">{w.title} &middot; {w.start} - {w.end || "Present"}</div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{w.description}</p>
                 </div>
-                <button onClick={() => remove(w.company)}
+                <button onClick={() => remove(w.id)}
                   className="shrink-0 text-xs text-red-400 hover:text-red-300 border border-red-400/30 hover:border-red-300/50 rounded-xl px-3 py-1.5 transition cursor-pointer flex items-center gap-1">
                   <Trash2 className="size-3" /> Sil
                 </button>

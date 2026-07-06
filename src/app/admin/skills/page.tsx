@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useAdminAuth } from "../layout";
 import { X, Plus, Save, Loader2, Zap } from "lucide-react";
 
 export default function SkillsPage() {
-  const { password } = useAdminAuth();
   const [skills, setSkills] = useState<string[]>([]);
   const [newSkill, setNewSkill] = useState("");
   const [saving, setSaving] = useState(false);
@@ -32,7 +30,8 @@ export default function SkillsPage() {
     setSuccess("");
     const res = await fetch("/api/admin/skills", {
       method: "PUT",
-      headers: { "Content-Type": "application/json", "x-admin-password": password },
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
       body: JSON.stringify(skills),
     });
     if (res.ok) setSuccess("Kaydedildi!");

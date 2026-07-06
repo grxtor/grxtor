@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useAdminAuth } from "../layout";
 import { Plus, Trash2, FolderOpen, ExternalLink } from "lucide-react";
 
 interface Project {
+  id: string;
   title: string;
   href: string;
   dates: string;
@@ -16,7 +16,6 @@ interface Project {
 }
 
 export default function ProjectsPage() {
-  const { password } = useAdminAuth();
   const [items, setItems] = useState<Project[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
@@ -26,7 +25,7 @@ export default function ProjectsPage() {
   });
 
   const load = useCallback(async () => {
-    const res = await fetch("/api/projects");
+    const res = await fetch("/api/admin/projects");
     if (res.ok) setItems(await res.json());
   }, []);
 
@@ -37,6 +36,7 @@ export default function ProjectsPage() {
     setLoading(true);
     setSuccess("");
     const project: Project = {
+      id: crypto.randomUUID(),
       title: form.title,
       href: form.href,
       dates: form.dates,
@@ -46,9 +46,10 @@ export default function ProjectsPage() {
       video: form.video,
       active: form.active,
     };
-    const res = await fetch("/api/projects", {
+    const res = await fetch("/api/admin/projects", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-admin-password": password },
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
       body: JSON.stringify(project),
     });
     if (res.ok) {
@@ -60,11 +61,12 @@ export default function ProjectsPage() {
     setTimeout(() => setSuccess(""), 3000);
   };
 
-  const remove = async (title: string) => {
-    await fetch("/api/projects", {
+  const remove = async (id: string) => {
+    await fetch("/api/admin/projects", {
       method: "DELETE",
-      headers: { "Content-Type": "application/json", "x-admin-password": password },
-      body: JSON.stringify({ title }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({ id }),
     });
     load();
   };
@@ -130,7 +132,7 @@ export default function ProjectsPage() {
         ) : (
           <div className="space-y-3">
             {items.map(p => (
-              <div key={p.title} className="flex items-start justify-between gap-4 border border-border rounded-2xl p-5 bg-card">
+              <div key={p.id} className="flex items-start justify-between gap-4 border border-border rounded-2xl p-5 bg-card">
                 <div className="min-w-0 space-y-1.5">
                   <div className="flex items-center gap-2">
                     <FolderOpen className="size-4 text-muted-foreground" />
@@ -154,7 +156,7 @@ export default function ProjectsPage() {
                     </div>
                   )}
                 </div>
-                <button onClick={() => remove(p.title)}
+                <button onClick={() => remove(p.id)}
                   className="shrink-0 text-xs text-red-400 hover:text-red-300 border border-red-400/30 hover:border-red-300/50 rounded-xl px-3 py-1.5 transition cursor-pointer flex items-center gap-1">
                   <Trash2 className="size-3" /> Sil
                 </button>

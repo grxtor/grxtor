@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useAdminAuth } from "../layout";
 import { Save, Loader2 } from "lucide-react";
 
 interface Social {
@@ -25,7 +24,6 @@ interface Profile {
 }
 
 export default function ProfilePage() {
-  const { password } = useAdminAuth();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState("");
@@ -40,7 +38,8 @@ export default function ProfilePage() {
     setSuccess("");
     const res = await fetch("/api/admin/profile", {
       method: "PUT",
-      headers: { "Content-Type": "application/json", "x-admin-password": password },
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
       body: JSON.stringify(profile),
     });
     if (res.ok) setSuccess("Kaydedildi!");

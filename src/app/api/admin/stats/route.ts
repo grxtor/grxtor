@@ -1,17 +1,12 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
+import { readJsonFile } from "@/lib/data";
 
-const dataDir = path.join(process.cwd(), "data");
 const contentDir = path.join(process.cwd(), "content");
 
 async function countJsonArray(file: string): Promise<number> {
-  try {
-    const data = await fs.readFile(path.join(dataDir, file), "utf-8");
-    return JSON.parse(data).length;
-  } catch {
-    return 0;
-  }
+  return (await readJsonFile<unknown[]>(file, [])).length;
 }
 
 async function countBlogPosts(): Promise<number> {

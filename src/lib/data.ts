@@ -12,6 +12,11 @@ export async function readJsonFile<T>(filename: string, fallback: T): Promise<T>
   }
 }
 
+export async function writeJsonFile<T>(filename: string, data: T): Promise<void> {
+  await fs.mkdir(dataDir, { recursive: true });
+  await fs.writeFile(path.join(dataDir, filename), JSON.stringify(data, null, 2));
+}
+
 export interface ProfileData {
   name: string;
   realName: string;
@@ -28,6 +33,7 @@ export interface ProfileData {
 }
 
 export interface WorkData {
+  id: string;
   company: string;
   href: string;
   badges: string[];
@@ -40,6 +46,7 @@ export interface WorkData {
 }
 
 export interface ProjectData {
+  id: string;
   title: string;
   href: string;
   dates: string;

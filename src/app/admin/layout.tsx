@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -17,12 +17,6 @@ import {
   Menu,
   X,
 } from "lucide-react";
-
-const AuthContext = createContext<{ password: string }>({ password: "" });
-
-export function useAdminAuth() {
-  return useContext(AuthContext);
-}
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -47,39 +41,32 @@ export default function AdminLayout({
   const pathname = usePathname();
 
   useEffect(() => {
-    const pw = sessionStorage.getItem("admin-password");
-    if (pw) {
-      fetch("/api/admin/auth", {
-        method: "POST",
-        headers: { "x-admin-password": pw },
-      }).then((res) => {
-        if (res.ok) {
-          setAuthed(true);
-          setPassword(pw);
-        }
-        setChecking(false);
-      });
-    } else {
+    fetch("/api/admin/auth", { credentials: "same-origin" }).then((res) => {
+      setAuthed(res.ok);
       setChecking(false);
-    }
+    });
   }, []);
 
   const login = async () => {
     setError("");
     const res = await fetch("/api/admin/auth", {
       method: "POST",
-      headers: { "x-admin-password": password },
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({ password }),
     });
     if (res.ok) {
-      sessionStorage.setItem("admin-password", password);
       setAuthed(true);
+      setPassword("");
+    } else if (res.status === 429) {
+      setError("Cok fazla deneme. Lutfen daha sonra tekrar deneyin.");
     } else {
       setError("Yanlis sifre.");
     }
   };
 
-  const logout = () => {
-    sessionStorage.removeItem("admin-password");
+  const logout = async () => {
+    await fetch("/api/admin/auth", { method: "DELETE", credentials: "same-origin" });
     setAuthed(false);
     setPassword("");
   };
@@ -140,7 +127,7 @@ export default function AdminLayout({
   }
 
   return (
-    <AuthContext.Provider value={{ password }}>
+    <>
       <div className="min-h-screen bg-background flex">
         {/* Mobile menu button */}
         <button
@@ -246,6 +233,6 @@ export default function AdminLayout({
           <div className="p-6 pt-20 lg:pt-6 max-w-5xl mx-auto">{children}</div>
         </main>
       </div>
-    </AuthContext.Provider>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 [
   {
+    "id": "ea6188dc-85af-40b5-b790-d84e2b8a233d",
     "company": "The Lost Label",
     "href": "https://thelostlabel.com",
     "badges": ["Founder"],
@@ -11,6 +12,7 @@
     "description": "Founded and run The Lost Label, an independent music label releasing Brazilian Funk and Phonk music. Responsible for creative direction, web design, branding, and artist development. Built the full website and digital presence from scratch."
   },
   {
+    "id": "ab567ee2-9e1f-4b96-b9d1-16805789ac95",
     "company": "Elysian Records",
     "href": "https://elysianrecords.com",
     "badges": [],
