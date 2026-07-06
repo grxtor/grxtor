@@ -31,6 +31,12 @@ export const metadata: Metadata = {
   keywords: [
     "Abdullah Hüseyin Efe",
     "Abdullah Huseyin Efe",
+    "Abdullah Efe",
+    "Abdullah H. Efe",
+    "Abdullah H Efe",
+    "A. Hüseyin Efe",
+    "Hüseyin Efe",
+    "Huseyin Efe",
     "GRXTOR",
     "grxtor",
     "web designer",
@@ -40,6 +46,8 @@ export const metadata: Metadata = {
     "Phonk",
     "web developer Turkey",
     "music producer Turkey",
+    "web tasarımcı",
+    "müzik prodüktörü",
   ],
   authors: [{ name: "Abdullah Hüseyin Efe", url: DATA_DEFAULTS.url }],
   creator: "Abdullah Hüseyin Efe",
@@ -74,10 +82,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@grxtor",
   },
-  verification: {
-    google: "",
-    yandex: "",
-  },
+  // Search Console doğrulama kodu alınınca buraya eklenecek:
+  // verification: { google: "<kod>", yandex: "<kod>" },
 };
 
 export default function RootLayout({
