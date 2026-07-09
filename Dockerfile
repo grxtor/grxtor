@@ -14,7 +14,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 FROM base AS deps
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # pnpm store'u Docker cache'e bağla → paketler yeniden indirilmez
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
