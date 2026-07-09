@@ -4,7 +4,8 @@
 #  BASE — pnpm kurulu Node
 # ─────────────────────────────────────────
 FROM node:22-alpine AS base
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# pnpm sürümü package.json'daki "packageManager" alanından okunur (corepack)
+RUN corepack enable
 
 # ─────────────────────────────────────────
 #  DEPS — bağımlılıkları yükle (cache'li)
